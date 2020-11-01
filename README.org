@@ -1,19 +1,30 @@
 * :man_scientist: :test_tube: :microscope: Ethereum Blockchain
 
 This is my personal laboratory where I conduct experiments with Smart Contracts
-in the Ethereum blockchain.
+(SC) in the Ethereum blockchain.
 
 ** Workflow
 
+   I like short feedback loops for the exploration phase of a problem, so I'm
+   using truffle's =develop= command to run a REPL. It comes with built-in
+   utility functions to migrate, test, and compile the SC without quitting the
+   underlying process.
+
    #+begin_src shell
-     # Starts the development REPL with contracts defined in `./contracts` compiled
-     # and deployed.
      truffle develop
    #+end_src
 
-*** In the REPL
+   The above method is often enough, but I sometimes feel like having more
+   visual feedback on the created transactions resulted from SC interactions
+   from the REPL. For that, I like to pair truffle with Ganache GUI.
 
-    - =migrate= compile and deploy changed contracts.
+   #+begin_src shell
+     truffle compile
+     truffle migrate --network development
+     truffle console --network development
+   #+end_src
+
+   *NOTE:* The networks are defined at [[./truffle-config.js][truffle-config.js]].
 
 ** Testing
 
@@ -31,7 +42,7 @@ in the Ethereum blockchain.
     have some undesired behaviors. However, we can workaround the issue by
     deploying the contract again in the test scope.
 
-    Calling `.new` in the contract class will force a new deploy with a new
+    Calling =.new= in the contract class will force a new deploy with a new
     address. Thus the state will be fresh only within the test where it was
     invoked.
 
