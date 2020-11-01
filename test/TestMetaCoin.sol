@@ -1,3 +1,5 @@
+// NOTE: Default example provided by `truffle unbox metacoin`
+
 pragma solidity >=0.4.25 <0.7.0;
 
 import "truffle/Assert.sol";

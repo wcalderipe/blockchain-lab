@@ -1,3 +1,5 @@
+// NOTE: Default example provided by `truffle unbox metacoin`
+
 const MetaCoin = artifacts.require("MetaCoin");
 
 contract('MetaCoin', (accounts) => {
