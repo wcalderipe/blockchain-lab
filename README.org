@@ -1,0 +1,69 @@
+* :man_scientist: :test_tube: :microscope: Ethereum Blockchain
+
+This is my personal laboratory where I conduct experiments with Smart Contracts
+in the Ethereum blockchain.
+
+** Workflow
+
+   #+begin_src shell
+     # Starts the development REPL with contracts defined in `./contracts` compiled
+     # and deployed.
+     truffle develop
+   #+end_src
+
+*** In the REPL
+
+    - =migrate= compile and deploy changed contracts.
+
+** Testing
+
+   #+begin_src shell
+     # Runs all tests.
+     truffle test
+
+     # Runs a single test in any supported extension (.js, .ts, .sol).
+     truffle test <FILEPATH>
+   #+end_src
+
+*** State
+
+    By default, Truffle doesn't reset the state in between tests and this might
+    have some undesired behaviors. However, we can workaround the issue by
+    deploying the contract again in the test scope.
+
+    Calling `.new` in the contract class will force a new deploy with a new
+    address. Thus the state will be fresh only within the test where it was
+    invoked.
+
+    #+begin_src javascript
+      it('foo', async () => {
+        console.log((await TodoList.deployed()).address) // address 1
+        console.log((await TodoList.new()).address)      // address 2
+        console.log((await TodoList.deployed()).address) // address 1
+      })
+
+      it('bar', async () => {
+        console.log((await TodoList.deployed()).address) // address 1
+      })
+    #+end_src
+
+    It seems intuitive to me to always deploy a new contract for every test to
+    avoid state leaking. However, the Truffle team must have a good reason to
+    share the deployed address within tests in the same file, and I don't know
+    the consequences of repeatably deploy the same contract yet.
+
+*** Debugging
+
+    See [[https://www.trufflesuite.com/docs/truffle/getting-started/debugging-your-contracts#in-test-debugging][In-test debugging]] documentation.
+
+** Experiments
+
+*** Todo List
+
+    See [[./contracts/TodoList.sol][TodoList.sol]] and [[./test/todo_list.js][todo_list.js]].
+
+    #+begin_src javascript
+      TodoList.deployed().then(todo => todo.add("do some foo"))
+      TodoList.deployed().then(todo => todo.get(0))
+      TodoList.deployed().then(todo => todo.toggle(0))
+    #+end_src
