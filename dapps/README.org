@@ -1,0 +1,8 @@
+* Experimental decentralized-applications
+
+** Getting Started
+
+   #+begin_src shell
+     npm install
+     clj -M:dev
+   #+end_src

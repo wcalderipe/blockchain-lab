@@ -12,6 +12,14 @@ This is my personal laboratory where I conduct experiments with Smart Contracts
    - [[https://www.trufflesuite.com/ganache][Ganache]] Ethereum blockchain sandbox (optional)
    - [[https://github.com/trufflesuite/ganache-cli][ganache-cli]] command-line version of Ganache (optional)
 
+   Some of the SC have smalls decentralized-applications (dApps) to test how's
+   the Web3 integration with them. I'm using ClojureScript to write these, and
+   you'll find them in the [[./dapps][dapps/]] folder.
+
+   They're just an extension of the SC; thus, none of them are mandatory. But,
+   if you want to play with them using a blockchain sandbox, you'll need to
+   compile using the [[https://clojure.org/guides/getting_started][Clojure CLI]].
+
 ** Workflow
 
    I like short feedback loops for the exploration phase of a problem, so I'm
@@ -28,6 +36,7 @@ This is my personal laboratory where I conduct experiments with Smart Contracts
    from the REPL. For that, I like to pair truffle with Ganache GUI.
 
    #+begin_src shell
+     # Before running the commands below, you need to start the Ganache GUI locally.
      truffle compile
      truffle migrate --network development
      truffle console --network development
